@@ -1,21 +1,30 @@
 package com.dakodelabs.maintenance_app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name ="university_id")
     private String universityId;
+
     private String password;
     private String name;
     private String position;
     private String email;
     private String role; // EMPLOYEE, APPROVER, ADMIN
+
+    public User(Long id, String universityId, String password, String name, String position, String email, String role) {
+        this.id = id;
+        this.universityId = universityId;
+        this.password = password;
+        this.name = name;
+        this.position = position;
+        this.email = email;
+        this.role = role;
+    }
 
     public Long getId() {
         return id;

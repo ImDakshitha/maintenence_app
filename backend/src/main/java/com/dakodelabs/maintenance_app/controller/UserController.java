@@ -2,6 +2,7 @@ package com.dakodelabs.maintenance_app.controller;
 
 import com.dakodelabs.maintenance_app.model.User;
 import com.dakodelabs.maintenance_app.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
