@@ -23,5 +23,12 @@ public class MaintenanceRequestService {
         request.setApprovalStatus("APPROVED");
         return requestRepository.save(request);
     }
+    public void deleteMaintenanceRequestById(Long id) {
+        if (requestRepository.existsById(id)) {
+            requestRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Maintenance request with ID " + id + " not found");
+        }
+    }
 }
 

@@ -7,6 +7,9 @@ import java.time.LocalTime;
 
 @Entity
 public class MaintenanceRequest {
+    public MaintenanceRequest() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -26,4 +26,14 @@ public class MaintenanceRequestController {
     public ResponseEntity<MaintenanceRequest> approveRequest(@PathVariable Long id) {
         return ResponseEntity.ok(requestService.approveRequest(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMaintenanceRequest(@PathVariable Long id) {
+        try {
+            requestService.deleteMaintenanceRequestById(id);
+            return ResponseEntity.ok("Maintenance request with ID " + id + " deleted successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 }

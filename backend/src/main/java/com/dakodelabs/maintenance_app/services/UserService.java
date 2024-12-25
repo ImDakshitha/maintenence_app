@@ -5,6 +5,8 @@ import com.dakodelabs.maintenance_app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     @Autowired
@@ -17,6 +19,8 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
+//        Optional<User> user1 =userRepository.findById(id);
+//        System.out.println(user1);
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
@@ -25,6 +29,9 @@ public class UserService {
         existingUser.setName(updatedUser.getName());
         existingUser.setPosition(updatedUser.getPosition());
         existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setRole(updatedUser.getRole());
+        existingUser.setUniversityId(updatedUser.getUniversityId());
+        existingUser.setPassword(updatedUser.getPassword());
         return userRepository.save(existingUser);
     }
 }
