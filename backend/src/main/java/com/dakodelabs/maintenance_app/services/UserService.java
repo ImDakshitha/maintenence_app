@@ -5,7 +5,6 @@ import com.dakodelabs.maintenance_app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -13,14 +12,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public User registerUser(User user) {
-        // Hash password and save user
         user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
     public User getUserById(Long id) {
-//        Optional<User> user1 =userRepository.findById(id);
-//        System.out.println(user1);
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
