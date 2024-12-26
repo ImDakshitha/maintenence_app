@@ -16,7 +16,7 @@ public class User {
     private String name;
     private String position;
     private String email;
-    private String role; // EMPLOYEE, APPROVER, ADMIN
+    private String role;
 
     public User(Long id, String universityId, String password, String name, String position, String email, String role) {
         this.id = id;

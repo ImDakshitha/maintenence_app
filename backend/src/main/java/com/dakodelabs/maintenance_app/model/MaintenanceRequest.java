@@ -1,91 +1,112 @@
 package com.dakodelabs.maintenance_app.model;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "maintenance_requests")
 public class MaintenanceRequest {
-    public MaintenanceRequest() {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate requestDate;
-    private LocalTime requestTime;
-    private String type; // MAINTENANCE, WORK
+
+    private LocalDateTime requestDate;
+    private LocalDateTime requestTime;
+    private String type;
     private String location;
-
-    @Column(length = 1000)
     private String description;
-    private String approvalStatus; // PENDING, APPROVED, REJECTED
+    private Long requestedById;
+    private String approvalStatus;
+    private String status;
 
-    @ManyToOne
-    private User requestedBy;
+    // Default constructor
+    public MaintenanceRequest() {
+    }
 
+    // Constructor with all fields
+    public MaintenanceRequest(Long id, LocalDateTime requestDate, LocalDateTime requestTime, String type, String location, String description, Long requestedById, String approvalStatus, String status) {
+        this.id = id;
+        this.requestDate = requestDate;
+        this.requestTime = requestTime;
+        this.type = type;
+        this.location = location;
+        this.description = description;
+        this.requestedById = requestedById;
+        this.approvalStatus = approvalStatus;
+        this.status = status;
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public LocalDate getRequestDate() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getRequestDate() {
         return requestDate;
     }
 
-    public LocalTime getRequestTime() {
+    public void setRequestDate(LocalDateTime requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public LocalDateTime getRequestTime() {
         return requestTime;
+    }
+
+    public void setRequestTime(LocalDateTime requestTime) {
+        this.requestTime = requestTime;
     }
 
     public String getType() {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getLocation() {
         return location;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public User getRequestedBy() {
-        return requestedBy;
-    }
-
-    public void setRequestedBy(User requestedBy) {
-        this.requestedBy = requestedBy;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRequestTime(LocalTime requestTime) {
-        this.requestTime = requestTime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setRequestDate(LocalDate requestDate) {
-        this.requestDate = requestDate;
+    public Long getRequestedById() {
+        return requestedById;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRequestedById(Long requestedById) {
+        this.requestedById = requestedById;
+    }
+
+    public String getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(String approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
