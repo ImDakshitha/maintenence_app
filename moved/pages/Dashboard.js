@@ -18,13 +18,25 @@ function Dashboard() {
             }
 
             try {
-                const response = await axios.get('/requests', {
-                    headers: { Authorization: `Bearer ${token}` },
+                // Fetch user role from token or user details
+                const decodedToken = JSON.parse(atob(token.split('.')[1]));
+                const universityId = decodedToken.sub; // Default to 'EMPLOYEE' if role is not present
+                console.log(universityId);
+
+                let response;
+                // if (userRole === 'EMPLOYEE') {
+                //     response = await axios.get('/requests/', {
+                //         headers: { Authorization: `${token}` },
+                //     });
+                // } else {
+                response = await axios.get('http://localhost:8080/api/requests', {
+                    headers: { Authorization: `${token}` },
                 });
+            
                 setRequests(response.data);
             } catch (err) {
                 console.error("Error fetching requests: ", err);
-                setError('Failed to fetch requests. Please try again later.');
+                setError('Failed to fetch requests. Please try again later.'+err);
             } finally {
                 setLoading(false);
             }
@@ -33,6 +45,11 @@ function Dashboard() {
         fetchRequests();
     }, [navigate]);
 
+    const handleLogout = () => {
+        localStorage.removeItem('token'); 
+        navigate('/');
+    };
+
     if (loading) {
         return <div className="loading">Loading...</div>;
     }
@@ -40,11 +57,6 @@ function Dashboard() {
     if (error) {
         return <div className="error-message">{error}</div>;
     }
-
-    const handleLogout = () => {
-        localStorage.removeItem('token'); 
-        navigate('/');
-    };
 
     return (
         <div className="dashboard-container">
