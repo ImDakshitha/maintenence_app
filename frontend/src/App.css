@@ -1,0 +1,26 @@
+/* App-wide styles */
+.App {
+    padding-top: 80px; /* Reduced padding to avoid excessive space */
+    min-height: 100vh;
+    position: relative;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1; /* Ensure content stays below navbar */
+}
+
+/* Style for auth pages (login, register) */
+.auth-container {
+    margin-top: 40px; /* Add specific margin for auth containers */
+}
+
+/* Style for dashboard and other content pages */
+.maintenance-dashboard,
+.profile-page-container,
+.user-management-container {
+    margin-top: 20px;
+}

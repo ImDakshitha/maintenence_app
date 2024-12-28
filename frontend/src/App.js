@@ -8,6 +8,8 @@ import UserService from './components/service/UserService';
 import UpdateUser from './components/userspage/UpdateUser';
 import UserManagementPage from './components/userspage/UserManagementPage';
 import ProfilePage from './components/userspage/ProfilePage';
+import MaintenanceDashboard from './components/maintenance/MaintenanceDashboard';
+import MaintenanceRequestForm from './components/maintenance/MaintenanceRequestForm';
 
 function App() {
   const location = useLocation(); // Get the current location
@@ -21,6 +23,8 @@ function App() {
           <Route exact path="/" element={<LoginPage />} />
           <Route exact path="/login" element={<LoginPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/dashboard" element={<MaintenanceDashboard />} />
+          <Route path="/maintenance/new" element={<MaintenanceRequestForm />} />
 
           {/* Check if user is authenticated and admin before rendering admin-only routes */}
           {UserService.adminOnly() && (

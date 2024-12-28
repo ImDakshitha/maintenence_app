@@ -3,6 +3,9 @@ package com.dakodelabs.maintenance_app.service;
 import com.dakodelabs.maintenance_app.dto.ReqRes;
 import com.dakodelabs.maintenance_app.entity.OurUsers;
 import com.dakodelabs.maintenance_app.repository.UsersRepo;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UsersManagementService {
 
@@ -30,6 +34,15 @@ public class UsersManagementService {
         ReqRes resp = new ReqRes();
 
         try {
+            // Check if user with same universityId already exists
+            Optional<OurUsers> existingUser = usersRepo.findByUniversityId(registrationRequest.getUniversityId());
+            log.info(existingUser.toString());
+            if (existingUser.isPresent()) {
+                resp.setStatusCode(400);
+                resp.setError("User with university ID " + registrationRequest.getUniversityId() + " already exists");
+                return resp;
+            }
+
             OurUsers ourUser = new OurUsers();
             ourUser.setUniversityId(registrationRequest.getUniversityId());
             ourUser.setPosition(registrationRequest.getPosition());

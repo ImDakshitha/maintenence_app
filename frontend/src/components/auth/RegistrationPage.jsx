@@ -7,10 +7,10 @@ function RegistrationPage() {
 
     const [formData, setFormData] = useState({
         name: '',
-        email: '',
+        universityId: '',
         password: '',
         role: '',
-        city: ''
+        position: ''
     });
 
     const handleInputChange = (e) => {
@@ -21,25 +21,28 @@ function RegistrationPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Call the register method from UserService
-
             const token = localStorage.getItem('token');
-            await UserService.register(formData, token);
+            const response = await UserService.register(formData, token);
+            
+            if (response.statusCode === 400) {
+                alert(response.error); // Or handle the error in a more user-friendly way
+                return;
+            }
 
             // Clear the form fields after successful registration
             setFormData({
                 name: '',
-                email: '',
+                universityId: '',
                 password: '',
                 role: '',
-                city: ''
+                position: ''
             });
             alert('User registered successfully');
             navigate('/admin/user-management');
 
         } catch (error) {
             console.error('Error registering user:', error);
-            alert('An error occurred while registering user');
+            alert(error.response?.data?.error || 'An error occurred while registering user');
         }
     };
 
@@ -52,8 +55,8 @@ function RegistrationPage() {
                     <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
                 </div>
                 <div className="form-group">
-                    <label>Email:</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                    <label>University ID:</label>
+                    <input type="text" name="universityId" value={formData.universityId} onChange={handleInputChange} required />
                 </div>
                 <div className="form-group">
                     <label>Password:</label>
@@ -61,11 +64,11 @@ function RegistrationPage() {
                 </div>
                 <div className="form-group">
                     <label>Role:</label>
-                    <input type="text" name="role" value={formData.role} onChange={handleInputChange} placeholder="Enter your role" required />
+                    <input type="text" name="role" value={formData.role} onChange={handleInputChange} placeholder="Enter role" required />
                 </div>
                 <div className="form-group">
-                    <label>City:</label>
-                    <input type="text" name="city" value={formData.city} onChange={handleInputChange} placeholder="Enter your city" required />
+                    <label>Position:</label>
+                    <input type="text" name="position" value={formData.position} onChange={handleInputChange} placeholder="Enter position" required />
                 </div>
                 <button type="submit">Register</button>
             </form>

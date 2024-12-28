@@ -26,8 +26,8 @@ function ProfilePage() {
         <div className="profile-page-container">
             <h2>Profile Information</h2>
             <p>Name: {profileInfo.name}</p>
-            <p>Email: {profileInfo.email}</p>
-            <p>City: {profileInfo.city}</p>
+            <p>University ID: {profileInfo.universityId}</p>
+            <p>Position: {profileInfo.position}</p>
             {profileInfo.role === "ADMIN" && (
                 <button><Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link></button>
             )}

@@ -21,7 +21,8 @@ const handleSubmit = async (e) => {
         if (userData.token) {
             localStorage.setItem('token', userData.token)
             localStorage.setItem('role', userData.role)
-            navigate('/profile')
+            localStorage.setItem('universityId', userData.universityId)
+            navigate('/dashboard')
         }else{
             setError(userData.message)
         }

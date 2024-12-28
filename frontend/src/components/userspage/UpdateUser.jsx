@@ -9,9 +9,9 @@ function UpdateUser() {
 
   const [userData, setUserData] = useState({
     name: '',
-    email: '',
+    universityId: '',
     role: '',
-    city: ''
+    position: ''
   });
 
   useEffect(() => {
@@ -22,8 +22,8 @@ function UpdateUser() {
     try {
       const token = localStorage.getItem('token');
       const response = await UserService.getUserById(userId, token); // Pass userId to getUserById
-      const { name, email, role, city } = response.ourUsers;
-      setUserData({ name, email, role, city });
+      const { name, universityId, role, position } = response.ourUsers;
+      setUserData({ name, universityId, role, position });
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -65,16 +65,16 @@ function UpdateUser() {
           <input type="text" name="name" value={userData.name} onChange={handleInputChange} />
         </div>
         <div className="form-group">
-          <label>Email:</label>
-          <input type="email" name="email" value={userData.email} onChange={handleInputChange} />
+          <label>University ID:</label>
+          <input type="text" name="University ID" value={userData.universityId} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label>Role:</label>
           <input type="text" name="role" value={userData.role} onChange={handleInputChange} />
         </div>
         <div className="form-group">
-          <label>City:</label>
-          <input type="text" name="city" value={userData.city} onChange={handleInputChange} />
+          <label>Position:</label>
+          <input type="text" name="Position" value={userData.position} onChange={handleInputChange} />
         </div>
         <button type="submit">Update</button>
       </form>
