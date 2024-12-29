@@ -10,6 +10,7 @@ import UserManagementPage from './components/userspage/UserManagementPage';
 import ProfilePage from './components/userspage/ProfilePage';
 import MaintenanceDashboard from './components/maintenance/MaintenanceDashboard';
 import MaintenanceRequestForm from './components/maintenance/MaintenanceRequestForm';
+import './styles/buttons.css';
 
 function App() {
   const location = useLocation(); // Get the current location

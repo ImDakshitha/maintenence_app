@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserService from '../service/UserService';
 import './MaintenanceDashboard.css';
@@ -8,44 +8,35 @@ function MaintenanceDashboard() {
     const [requests, setRequests] = useState([]);
     const [profileInfo, setProfileInfo] = useState({});
     const navigate = useNavigate();
-    const { userId } = useParams();
+    const isAdmin = UserService.isAdmin();
+
+    const fetchProfileInfo = useCallback(async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const profileResponse = await UserService.getYourProfile(token);
+            setProfileInfo(profileResponse.ourUsers);
+            
+            if (isAdmin) {
+                const response = await axios.get(
+                    'http://localhost:8080/api/maintenance/requests/all',
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                setRequests(response.data);
+            } else {
+                const response = await axios.get(
+                    `http://localhost:8080/api/maintenance/requests/${profileResponse.ourUsers.universityId}`,
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                setRequests(response.data);
+            }
+        } catch (error) {
+            console.error('Error fetching information:', error);
+        }
+    }, [isAdmin]);
 
     useEffect(() => {
         fetchProfileInfo();
-    }, []);
-
-
-
-    const fetchProfileInfo = async () => {
-        try {
-            const token = localStorage.getItem('token'); // Retrieve the token from localStorage
-            const profileresponse = await UserService.getYourProfile(token);
-            setProfileInfo(profileresponse.ourUsers);
-            console.log(profileresponse.ourUsers.universityId);
-            const universityId = profileresponse.ourUsers.universityId;
-            const response = await axios.get(
-                `http://localhost:8080/api/maintenance/requests/${universityId}`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            setRequests(response.data);
-        } catch (error) {
-            console.error('Error fetching profile information:', error);
-        }
-    };
-
-    const fetchRequests = async (universityId) => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.get(
-                `http://localhost:8080/api/maintenance/requests/${universityId}`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            setRequests(response.data);
-        } catch (error) {
-            console.error('Error fetching requests:', error);
-        }
-    };
-
+    }, [fetchProfileInfo]);
 
     const handleDelete = async (requestId) => {
         try {
@@ -54,7 +45,7 @@ function MaintenanceDashboard() {
                 `http://localhost:8080/api/maintenance/request/${requestId}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            fetchRequests();
+            fetchProfileInfo(); // Refresh the list after deletion
         } catch (error) {
             console.error('Error deleting request:', error);
         }
@@ -63,11 +54,8 @@ function MaintenanceDashboard() {
     return (
         <div className="maintenance-dashboard">
             <h2>Hello {profileInfo.name}</h2>
-            <h2>Maintenance Request Dashboard</h2>
-            <button
-                className="create-request-btn"
-                onClick={() => navigate('/maintenance/new')}
-            >
+            <h2>Maintenance Request Dashboard {isAdmin && '(Admin View)'}</h2>
+            <button className="btn btn-success" onClick={() => navigate('/maintenance/new')}>
                 Create New Request
             </button>
             <div className="requests-table">
@@ -78,6 +66,7 @@ function MaintenanceDashboard() {
                             <th>Location</th>
                             <th>Description</th>
                             <th>Requested Date/Time</th>
+                            {isAdmin && <th>Requested By</th>}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -88,11 +77,9 @@ function MaintenanceDashboard() {
                                 <td>{request.location}</td>
                                 <td>{request.description}</td>
                                 <td>{new Date(request.requestedDateTime).toLocaleString()}</td>
+                                {isAdmin && <td>{request.universityId}</td>}
                                 <td>
-                                    <button
-                                        className="delete-btn"
-                                        onClick={() => handleDelete(request.id)}
-                                    >
+                                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(request.id)}>
                                         Delete
                                     </button>
                                 </td>

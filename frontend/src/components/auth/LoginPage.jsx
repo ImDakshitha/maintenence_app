@@ -40,7 +40,7 @@ const handleSubmit = async (e) => {
     return(
         <div className="auth-container">
             <Logo />
-            <h2>Welcome to the Maintenance System</h2>
+            <h2>ONLINE MAINTENANCE REQUEST SYSTEM</h2>
             <div className="login-container">
                 <form onSubmit={handleSubmit}>
                         <input type="text" name="universityId" value={universityId} onChange={(e) => setUniversityId(e.target.value)} placeholder="Enter University ID" required/>

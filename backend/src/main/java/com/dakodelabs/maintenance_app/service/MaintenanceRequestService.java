@@ -20,6 +20,10 @@ public class MaintenanceRequestService {
         return maintenanceRequestRepository.findByUniversityId(universityId);
     }
 
+    public List<MaintenanceRequest> getAllRequests() {
+        return maintenanceRequestRepository.findAll();
+    }
+
     public void deleteRequest(Long requestId) {
         maintenanceRequestRepository.deleteById(requestId);
     }

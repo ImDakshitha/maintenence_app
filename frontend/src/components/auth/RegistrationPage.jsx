@@ -25,7 +25,7 @@ function RegistrationPage() {
             const response = await UserService.register(formData, token);
             
             if (response.statusCode === 400) {
-                alert(response.error); // Or handle the error in a more user-friendly way
+                alert(response.error); 
                 return;
             }
 

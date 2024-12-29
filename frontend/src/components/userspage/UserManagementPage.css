@@ -1,4 +1,4 @@
-.maintenance-dashboard {
+.user-management-container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 40px;
@@ -26,12 +26,13 @@
 
 /* Table Styling */
 .table-container {
+    margin-top: 20px;
     overflow-x: auto;
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.requests-table {
+.users-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
@@ -39,11 +40,11 @@
     background: white;
 }
 
-.requests-table thead {
+.users-table thead {
     background-color: #f8fafc;
 }
 
-.requests-table th {
+.users-table th {
     text-align: left;
     padding: 16px 24px;
     color: #4a5568;
@@ -54,7 +55,7 @@
     border-bottom: 2px solid #edf2f7;
 }
 
-.requests-table td {
+.users-table td {
     padding: 16px 24px;
     vertical-align: middle;
     border-bottom: 1px solid #edf2f7;
@@ -62,16 +63,16 @@
     font-size: 15px;
 }
 
-.requests-table tbody tr {
+.users-table tbody tr {
     transition: all 0.2s ease;
 }
 
-.requests-table tbody tr:hover {
+.users-table tbody tr:hover {
     background-color: #f7fafc;
 }
 
 /* Status Badges */
-.request-type-badge {
+.role-badge {
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 14px;
@@ -79,12 +80,12 @@
     display: inline-block;
 }
 
-.type-work {
+.role-admin {
     background-color: #ebf8ff;
     color: #3182ce;
 }
 
-.type-maintenance {
+.role-user {
     background-color: #f0fff4;
     color: #38a169;
 }
@@ -92,9 +93,24 @@
 /* Action Buttons */
 .action-buttons {
     display: flex;
-    gap: 8px;
+    gap: 12px;
     justify-content: flex-start;
     align-items: center;
+    min-height: 32px;
+}
+
+/* Add specific styling for action buttons container in table */
+.users-table td .action-buttons {
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+/* Ensure buttons in table cells are properly aligned */
+.users-table td .action-buttons .btn {
+    margin: 0;
+    height: 32px;
+    line-height: 32px;
+    min-width: 80px;
 }
 
 /* Empty State */
@@ -106,14 +122,14 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .maintenance-dashboard {
+    .user-management-container {
         margin: 20px;
         padding: 30px;
     }
 }
 
 @media (max-width: 768px) {
-    .maintenance-dashboard {
+    .user-management-container {
         margin: 15px;
         padding: 20px;
     }
@@ -124,8 +140,8 @@
         text-align: center;
     }
 
-    .requests-table th,
-    .requests-table td {
+    .users-table th,
+    .users-table td {
         padding: 12px 16px;
     }
 
@@ -134,4 +150,9 @@
         justify-content: center;
         gap: 8px;
     }
-} 
+
+    .users-table td .action-buttons {
+        display: flex;
+        width: 100%;
+    }
+}

@@ -15,13 +15,13 @@ function UpdateUser() {
   });
 
   useEffect(() => {
-    fetchUserDataById(userId); // Pass the userId to fetchUserDataById
-  }, [userId]); //wheen ever there is a chane in userId, run this
+    fetchUserDataById(userId);
+  }, [userId]);
 
   const fetchUserDataById = async (userId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await UserService.getUserById(userId, token); // Pass userId to getUserById
+      const response = await UserService.getUserById(userId, token);
       const { name, universityId, role, position } = response.ourUsers;
       setUserData({ name, universityId, role, position });
     } catch (error) {

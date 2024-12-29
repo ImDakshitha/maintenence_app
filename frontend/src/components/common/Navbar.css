@@ -1,78 +1,140 @@
-/* NAVBAR STYLING */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.link-button {
-    background-color: blue;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
+/* Modern Material Design Navbar */
 nav {
-    background-color: #333;
-    padding: 15px 20px;
-    font-size: 20px;
-    font-weight: 600;
+    background-color: #ffffff;
+    padding: 0 24px;
+    font-size: 16px;
+    font-weight: 500;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 60px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 70px;
     display: flex;
     align-items: center;
+    font-family: var(--font-primary);
 }
 
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
+    height: 100%;
+    gap: 16px;
 }
 
 li {
-    display: inline-block;
-    margin: 0 15px;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
 }
 
+/* Material Design Link Button Base */
 a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    display: inline-block;
+    min-width: 100px;
+    height: 36px;
+    padding: 0 16px;
+    background-color: #1976d2; /* Material Design primary blue */
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 
+                0 2px 2px 0 rgba(0,0,0,0.14), 
+                0 1px 5px 0 rgba(0,0,0,0.12);
 }
 
 a:hover {
-    background-color: #555;
-    transform: translateY(-2px);
+    background-color: #1565c0;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 
+                0 4px 5px 0 rgba(0,0,0,0.14), 
+                0 1px 10px 0 rgba(0,0,0,0.12);
+    transform: translateY(-1px);
+    color: white !important;
 }
 
-@media only screen and (max-width: 600px) {
+a:active {
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.2), 
+                0 8px 10px 1px rgba(0,0,0,0.14), 
+                0 3px 14px 2px rgba(0,0,0,0.12);
+}
+
+/* Active state */
+a.active {
+    background-color: #1565c0;
+    color: white !important;
+}
+
+/* Special styling for logout button */
+li:last-child a {
+    background-color: #1976d2;
+    color: white !important;
+}
+
+li:last-child a:hover {
+    background-color: #1565c0;
+    color: white !important;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
     nav {
         height: auto;
-        padding: 10px 0;
+        padding: 15px;
     }
 
     ul {
         flex-direction: column;
+        padding: 10px 0;
+        gap: 12px;
     }
 
     li {
-        display: block;
-        margin: 8px 0;
+        width: 100%;
+        margin: 0;
     }
+
+    a {
+        width: 100%;
+        justify-content: center;
+        padding: 0 16px;
+        height: 40px;
+    }
+
+    li:last-child a {
+        margin-left: 0;
+        margin-top: 4px;
+    }
+}
+
+/* Animation for hover effects */
+@keyframes buttonPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+a:active {
+    animation: buttonPop 0.3s ease;
 }

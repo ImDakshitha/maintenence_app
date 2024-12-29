@@ -24,6 +24,11 @@ public class MaintenanceRequestController {
         return ResponseEntity.ok(maintenanceRequestService.getUserRequests(universityId));
     }
 
+    @GetMapping("/requests/all")
+    public ResponseEntity<List<MaintenanceRequest>> getAllRequests() {
+        return ResponseEntity.ok(maintenanceRequestService.getAllRequests());
+    }
+
     @DeleteMapping("/request/{requestId}")
     public ResponseEntity<Void> deleteRequest(@PathVariable Long requestId) {
         maintenanceRequestService.deleteRequest(requestId);

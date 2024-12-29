@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../service/UserService';
 import { Link } from 'react-router-dom';
-
-
+import './ProfilePage.css';
 
 function ProfilePage() {
     const [profileInfo, setProfileInfo] = useState({});
@@ -13,8 +12,7 @@ function ProfilePage() {
 
     const fetchProfileInfo = async () => {
         try {
-
-            const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+            const token = localStorage.getItem('token');
             const response = await UserService.getYourProfile(token);
             setProfileInfo(response.ourUsers);
         } catch (error) {
@@ -24,12 +22,41 @@ function ProfilePage() {
 
     return (
         <div className="profile-page-container">
-            <h2>Profile Information</h2>
-            <p>Name: {profileInfo.name}</p>
-            <p>University ID: {profileInfo.universityId}</p>
-            <p>Position: {profileInfo.position}</p>
+            <div className="profile-header">
+                <h2>Profile Information</h2>
+            </div>
+            
+            <div className="profile-content">
+                <div className="profile-field">
+                    <label>Name</label>
+                    <p>{profileInfo.name}</p>
+                </div>
+                
+                <div className="profile-field">
+                    <label>University ID</label>
+                    <p>{profileInfo.universityId}</p>
+                </div>
+                
+                <div className="profile-field">
+                    <label>Position</label>
+                    <p>{profileInfo.position}</p>
+                </div>
+                
+                <div className="profile-field">
+                    <label>Role</label>
+                    <p>{profileInfo.role}</p>
+                </div>
+            </div>
+
             {profileInfo.role === "ADMIN" && (
-                <button><Link to={`/update-user/${profileInfo.id}`}>Update This Profile</Link></button>
+                <div className="profile-actions">
+                    <Link 
+                        to={`/update-user/${profileInfo.id}`} 
+                        className="btn btn-primary btn-sm"
+                    >
+                        Update Profile
+                    </Link>
+                </div>
             )}
         </div>
     );

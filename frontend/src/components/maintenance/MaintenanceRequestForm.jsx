@@ -7,11 +7,13 @@ import UserService from '../service/UserService';
 const locations = [
     "Main Building",
     "Library",
-    "Science Block",
-    "Engineering Block",
-    "Cafeteria",
-    "Sports Complex",
-    "Dormitory"
+    "Main Laboratory",
+    "Mian Canteen",
+    "Board Room",
+    "Gymnasium",
+    "Technolgy Building",
+    "Student Hostel - Feamle",
+    "Student Hostel - Male"
 ];
 
 function MaintenanceRequestForm() {
@@ -130,7 +132,9 @@ function MaintenanceRequestForm() {
                     />
                 </div>
 
-                <button type="submit">Submit Request</button>
+                <button type="submit" className="btn btn-success">
+                    Submit Request
+                </button>
             </form>
         </div>
     );

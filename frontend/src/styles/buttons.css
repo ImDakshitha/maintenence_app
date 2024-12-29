@@ -1,0 +1,96 @@
+/* Common Button Styles */
+.btn {
+    min-width: 100px;
+    height: 36px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+/* Button Variants */
+.btn-primary {
+    background-color: #1976d2;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: #1565c0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(25, 118, 210, 0.2);
+    color: white !important;
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    color: white !important;
+}
+
+.btn-success:hover {
+    background-color: #1b5e20;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(46, 125, 50, 0.2);
+    color: white !important;
+}
+
+.btn-danger {
+    background-color: #d32f2f;
+    color: white !important;
+}
+
+.btn-danger:hover {
+    background-color: #c62828;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(211, 47, 47, 0.2);
+    color: white !important;
+}
+
+/* Button Sizes */
+.btn-sm {
+    height: 32px;
+    min-width: 80px;
+    font-size: 13px;
+    padding: 0 12px;
+}
+
+.btn-lg {
+    height: 42px;
+    min-width: 120px;
+    font-size: 15px;
+    padding: 0 22px;
+}
+
+/* Button with Link */
+.btn a {
+    color: inherit !important;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Make the button itself a link */
+a.btn {
+    color: white !important;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn {
+        width: 100%;
+    }
+} 

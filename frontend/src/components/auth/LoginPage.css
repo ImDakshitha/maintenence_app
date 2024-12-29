@@ -65,7 +65,7 @@ input[type="text"] {
     border-radius: 5px;
     font-size: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 15px; /* Added spacing between inputs */
+    margin-bottom: 15px; 
 }
 
 input[type="text"]:focus,
@@ -86,7 +86,7 @@ button {
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%;
-    margin-top: 10px; /* Added spacing above button */
+    margin-top: 10px;
 }
 
 button:hover {
