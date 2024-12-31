@@ -9,7 +9,7 @@ function RegistrationPage() {
         name: '',
         universityId: '',
         password: '',
-        role: '',
+        role: 'USER',
         position: ''
     });
 
@@ -29,12 +29,11 @@ function RegistrationPage() {
                 return;
             }
 
-            // Clear the form fields after successful registration
             setFormData({
                 name: '',
                 universityId: '',
                 password: '',
-                role: '',
+                role: 'USER',
                 position: ''
             });
             alert('User registered successfully');
@@ -52,25 +51,58 @@ function RegistrationPage() {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Name:</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+                    <input 
+                        type="text" 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleInputChange} 
+                        required 
+                    />
                 </div>
                 <div className="form-group">
                     <label>University ID:</label>
-                    <input type="text" name="universityId" value={formData.universityId} onChange={handleInputChange} required />
+                    <input 
+                        type="text" 
+                        name="universityId" 
+                        value={formData.universityId} 
+                        onChange={handleInputChange} 
+                        required 
+                    />
                 </div>
                 <div className="form-group">
                     <label>Password:</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
+                    <input 
+                        type="password" 
+                        name="password" 
+                        value={formData.password} 
+                        onChange={handleInputChange} 
+                        required 
+                    />
                 </div>
                 <div className="form-group">
                     <label>Role:</label>
-                    <input type="text" name="role" value={formData.role} onChange={handleInputChange} placeholder="Enter role" required />
+                    <select 
+                        name="role" 
+                        value={formData.role} 
+                        onChange={handleInputChange} 
+                        required
+                    >
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label>Position:</label>
-                    <input type="text" name="position" value={formData.position} onChange={handleInputChange} placeholder="Enter position" required />
+                    <input 
+                        type="text" 
+                        name="position" 
+                        value={formData.position} 
+                        onChange={handleInputChange} 
+                        placeholder="Enter position" 
+                        required 
+                    />
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit" className="btn btn-primary">Register</button>
             </form>
         </div>
     );

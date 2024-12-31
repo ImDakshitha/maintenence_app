@@ -36,7 +36,6 @@ public class UsersManagementService {
         try {
             // Check if user with same universityId already exists
             Optional<OurUsers> existingUser = usersRepo.findByUniversityId(registrationRequest.getUniversityId());
-            log.info(existingUser.toString());
             if (existingUser.isPresent()) {
                 resp.setStatusCode(400);
                 resp.setError("User with university ID " + registrationRequest.getUniversityId() + " already exists");
