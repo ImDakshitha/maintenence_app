@@ -18,7 +18,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 dir('backend') {
-                    sh 'mvn clean package -DskipTests'
+                    bat 'mvn clean package -DskipTests'
                 }
             }
         }
@@ -26,8 +26,8 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir('frontend') {
-                    sh 'npm install'
-                    sh 'npm run build'
+                    bat 'npm install'
+                    bat 'npm run build'
                 }
             }
         }
@@ -36,17 +36,17 @@ pipeline {
             steps {
                 script {
                     // Build Frontend Docker image
-                    docker.build("${DOCKER_FRONTEND_IMAGE}:${DOCKER_TAG}", "-f frontend/Dockerfile ./frontend")
+                    bat "docker build -t ${DOCKER_FRONTEND_IMAGE}:${DOCKER_TAG} -f frontend/Dockerfile ./frontend"
                     
                     // Build Backend Docker image
-                    docker.build("${DOCKER_BACKEND_IMAGE}:${DOCKER_TAG}", "-f backend/Dockerfile ./backend")
+                    bat "docker build -t ${DOCKER_BACKEND_IMAGE}:${DOCKER_TAG} -f backend/Dockerfile ./backend"
                 }
             }
         }
         
         stage('Login to DockerHub') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                bat 'echo %DOCKERHUB_CREDENTIALS_PSW%| docker login -u %DOCKERHUB_CREDENTIALS_USR% --password-stdin'
             }
         }
         
@@ -54,10 +54,10 @@ pipeline {
             steps {
                 script {
                     // Push Frontend image
-                    sh "docker push ${DOCKER_FRONTEND_IMAGE}:${DOCKER_TAG}"
+                    bat "docker push ${DOCKER_FRONTEND_IMAGE}:${DOCKER_TAG}"
                     
                     // Push Backend image
-                    sh "docker push ${DOCKER_BACKEND_IMAGE}:${DOCKER_TAG}"
+                    bat "docker push ${DOCKER_BACKEND_IMAGE}:${DOCKER_TAG}"
                 }
             }
         }
@@ -65,7 +65,7 @@ pipeline {
     
     post {
         always {
-            sh 'docker logout'
+            bat 'docker logout'
             cleanWs()
         }
     }
